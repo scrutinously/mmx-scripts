@@ -11,6 +11,9 @@ Parse a log file and return filenames for plots that have won blocks
 steadyTX.sh
 Send a number of transactions to random addresses at a set interval
 
+colorizeLog
+awk script to add color to the log file based on certain patterns
+
 ## Usage
 To use the scripts, they must be run from a terminal session that has the added the mmx-node to the $PATH variable (i.e. the activate.sh script has been run) and ideally from the mmx-node directory.
 To achieve this you can copy the scripts into the mmx-node directory, or you can run `export PATH=$PATH:/path/to/directory` to add this directory to the PATH variable for your current session.
@@ -42,3 +45,8 @@ steadyTX.sh <amount in mojos> <number of TX> <delay interval in sec>
 ex. steadyTX.sh 2000 100 0.1 will send 100 transactions of 2000 mojos every 0.1 sec
 ```
 
+```
+colorizeLog <path to log file>
+ex. ./colorizeLog ~/mmx-node/testnet3/logs/mmx_node_2022_01_10.txt | less 
+tail -f ~/mmx-node/testnet3/logs/mmx_node_2022_01_10.txt | ./colorizeLog
+```

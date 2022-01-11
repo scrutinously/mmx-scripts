@@ -1,0 +1,18 @@
+#!/usr/bin/awk -f
+function color(b,c,s) {
+        printf("\033[%d;%dm%s\033[0m\n",b,30+c,s)
+}
+/dropped/ {color(0,1,$0);next}
+/Broadcasting|Verified VDF/ {color(0,2,$0);next}
+/WARN/ {color(3,3,$0);next}
+/Harvester/ {color(0,5,$0);next}
+/Created/ {color(4,6,$0);next}
+/INFO/ {color(1,4,$0);next}
+{print}
+
+# variable b is the text modifier
+# 0=normal, 1=bold, 3/7=invert, 4=underline, 6=flashing
+# variable c is the text color
+# 0=black, 1=red, 2=green, 3=yellow, 4=blue, 5=magenta
+# 6=cyan, 7=white
+# add 10 to any color to have it be background color isntead
