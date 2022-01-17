@@ -17,6 +17,9 @@ awk script to add color to the log file based on certain patterns
 plotExport.sh
 Parse log file and return block win details, output to CSV format
 
+mmxStats.sh
+Parse the og file and return farm performance stats
+
 ## Usage
 To use the scripts, they must be run from a terminal session that has the added the mmx-node to the $PATH variable (i.e. the activate.sh script has been run) and ideally from the mmx-node directory.
 To achieve this you can copy the scripts into the mmx-node directory, or you can run `export PATH=$PATH:/path/to/directory` to add this directory to the PATH variable for your current session.
@@ -57,3 +60,9 @@ ex. `./colorizeLog ~/mmx-node/testnet3/logs/mmx_node_2022_01_10.txt | less` Will
 `plotExport.sh <path to log file>`\
 ex. `plotExport.sh ~/mmx-node/testnet3/logs/mmx_node_2022_01_14.txt` will parse the input log file and output a CSV file with the same name.
 The CSV will contain the won block height, k size of the plot, the plot ID, the score that won, and the space difficulty at the time.
+
+### mmxStats.sh
+`mmxStats.sh <path to log file>`\
+ex. `mmxStats.sh ~/mmx-node/testnet3/logs/mmx_node_2022_01_14.txt` will parse the input log file and display stats such as plots passing filter,
+lookup times, blocks won, VDF stats, etc. The dropped stats at the bottom are not a concern unless they are incredibly high. These are common when
+a peer disconnects. If they are making up a large percentage of your total uploads, then it may be a concern.
