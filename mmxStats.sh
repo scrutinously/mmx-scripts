@@ -13,7 +13,7 @@ echo ${eligible[@]} | awk 'BEGIN {RS = "/"}; {if ($1 != "") printf "%-2d %s %s %
 echo ${lookup[@]} | awk 'BEGIN {RS = "/"}; $1>0.5{c1++}; $1>1{c2++}; 1>5{c3++}; {l="Lookups Longer Than"};
 	{sum+=$1}; END {printf "%-22s %5d\n%-22s %5d\n%-22s %5d\n%-22s %9f %s\n",l" 0.5s:",c1,"\033[33m"l" 1.0s:",c2,"\033[31m"l" 5.0s:",c3,"\033[37mAverage Lookup:",sum / NR,"sec"}'
 echo ${lookup[@]} | awk 'BEGIN {RS = "/"}; $1>max{max=$1}; END {printf "%-16s %10f %s\n","Longest Lookup:",max,"sec"}'
-awk '/Finalized/ {print $14}' $logFile | awk '{ sum += $1 }; END { if (NR > 0) printf "%16s %8d\n","Network Average Score:",sum/NR}'
+awk '/Finalized/ {print $17}' $logFile | awk '{ sum += $1 }; END { if (NR > 0) printf "%16s %8d\n","Network Average Score:",sum/NR}'
 printf "\033[32mBlocks Won: %19d\n" $blockCount
 printf "\033[37m----------------------\n"
 echo ${vdf[@]} | awk 'BEGIN {RS = "/"}; $2>2{v1++}; $2>5{v2++}; $1>15{d++}; {l="VDF Verification >"}
