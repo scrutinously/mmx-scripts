@@ -7,7 +7,7 @@ router=( $(awk '/dropped/ {printf "%d/%d/%d/%d/%d\n",$19,$21,$23,$25,$27}' $logF
 blockCount=0
 
 blockCount=$(awk '/Created block/ {bl=$9; sc[bl]=$16};
-        /Finalized/ {if ($14 == sc[$7]) c++}; END {print c}' $logFile)
+        /Finalized/ {if ($17 == sc[$7]) c++}; END {print c}' $logFile)
 
 echo ${eligible[@]} | awk 'BEGIN {RS = "/"}; {if ($1 != "") printf "%-2d %s %s %s: %7d\n",$2,$3,$4,$5,$1}'
 echo ${lookup[@]} | awk 'BEGIN {RS = "/"}; $1>0.5{c1++}; $1>1{c2++}; 1>5{c3++}; {l="Lookups Longer Than"};
@@ -18,7 +18,7 @@ printf "\033[32mBlocks Won: %19d\n" $blockCount
 printf "\033[37m----------------------\n"
 echo ${vdf[@]} | awk 'BEGIN {RS = "/"}; $2>2{v1++}; $2>5{v2++}; $1>15{d++}; {l="VDF Verification >"}
 	{sum+=$2}; END {printf "%-16s %14d\n%-16s %7d\n%-16s %7d\n%-22s %9f %s\n","VDF Delta >15s:",d,l"2.0s:",v1,"\033[31m"l"5.0s:",v2,"\033[37mAverage VDF Time:",sum / NR,"sec"}'
-awk '/Finalized/ $20>max{max=$20}; END {printf "%-22s %8d\n","Fastest Timelord:",max}' $logFile
+awk '/Finalized/ $23>max{max=$23}; END {printf "%-22s %8d\n","Fastest Timelord:",max}' $logFile
 echo "----------------------"
 echo ${router[@]} | awk 'BEGIN {RS = " "} {FS = "/"}; {bl+=$1}; {td+=$2}; {vd+=$3}; {pd+=$4}; {bd+=$5}; {if ($2 + $3 + $4 + $5 > 100) hi++};
 	END {printf "%-22s %8d\n%-22s %8d\n%-22s %8d\n%-22s %8d\n%-22s %8d\n%-22s %8d\n",\

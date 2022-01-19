@@ -6,7 +6,7 @@ address=()
 echo "Getting addresses from " $startheight " to " $height
 
 for ((i = $startheight ; i <= $height ; i++)); do
-	 address+=( $(mmx node get block $i | tr -d '",:' | awk '/address/ {print $2;exit;}') )
+	 address+=( $(mmx node get block $i | tr -d '",:' | awk '/address/ && ++i==2 {print $2;exit;}') )
 done
 
-echo ${address[@]} | tr ' ' '\n' | sort -u 
+echo ${address[@]} | tr ' ' '\n' | sort -u
