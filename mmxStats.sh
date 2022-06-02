@@ -20,7 +20,7 @@ awk '/Committed/ {print $17}' $logFile | awk '{ sum += $1 }; END { if (NR > 0) p
 printf "\033[37m----------------------\n"
 printf "\033[32mBlocks Won: %19d\n" $blockCount
 for k in ${ksizes[@]}; do
-	printf "\033[37mPercent k%d: %17f%%\n" $k $(awk -v k=$(grep -o $k <<< ${ksize[@]} | wc -l) -v bc=$blockCount 'BEGIN {pct = k / bc * 100; print pct}')
+	printf "\033[37mPercent k%s: %17f%%\n" $k $(awk -v k=$(grep -o $k <<< ${ksize[@]} | wc -l) -v bc=$blockCount 'BEGIN {pct = k / bc * 100; print pct}')
 done
 printf "\033[37m----------------------\n"
 echo ${vdf[@]} | awk 'BEGIN {RS = "/"}; $2>2{v1++}; $2>5{v2++}; $1>15{d++}; {l="VDF Verification >"}
